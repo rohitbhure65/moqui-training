@@ -3,19 +3,19 @@
 
 <!--    Generate records in the MoquiTraining entity automatically. -->
 
-<!--    <service verb="create" noun="MoquiTraining" type="entity-auto"> &lt;!&ndash; verb is use for define what action we want to perform but noun is optional &ndash;&gt;-->
-<!--        &lt;!&ndash;Input parameters are specified with the in-parameters element&ndash;&gt;-->
-<!--        <in-parameters>-->
-<!--            <parameter name="trainingName" required="true"/>-->
-<!--            <parameter name="trainingDate" required="true" format="MM/dd/yyyy"/>-->
-<!--            <parameter name="trainingPrice"/>-->
-<!--            <parameter name="trainingDuration"/>-->
-<!--        </in-parameters>-->
-<!--        &lt;!&ndash; is use for define what value will be return through in parameter &ndash;&gt;-->
-<!--        <out-parameters>-->
-<!--            <parameter name="trainingId" type="id" required="true"/>-->
-<!--        </out-parameters>-->
-<!--    </service>-->
+    <service verb="create" noun="MoquiTraining" type="entity-auto"> <!-- verb is use for define what action we want to perform but noun is optional -->
+        Input parameters are specified with the in-parameters element
+        <in-parameters>
+            <parameter name="trainingName" required="true"/>
+            <parameter name="trainingDate" required="true" format="MM/dd/yyyy"/>
+            <parameter name="trainingPrice"/>
+            <parameter name="trainingDuration"/>
+        </in-parameters>
+        <!-- is use for define what value will be return through in parameter -->
+        <out-parameters>
+            <parameter name="trainingId" type="id""/>
+        </out-parameters>
+    </service>
 
         <!-- inline service -->
 
@@ -32,8 +32,8 @@
         </out-parameters>
         <actions>
 <!--            <entity-make-value entity-name="org.moqui.training.MoquiTraining" value-field="training"/>-->
-<!--            <entity-set value-field="MoquiTraining" include="all"/>-->
-<!--            <if condition="!training.trainingId">-->
+<!--           <entity-set value-field="MoquiTraining" include="all"/>-->
+<!--            <if condition="!MoquiTraining.trainingId">-->
 <!--                <entity-sequenced-id-primary value-field="tutorial"/>-->
 <!--            </if>-->
 <!--            <entity-create value-field="MoquiTraining"/>-->
@@ -43,13 +43,14 @@
 
     <!--  Scripting Service-->
 
-<!--    <service verb="create" noun="MoquiGroovy" type="script">-->
-<!--&lt;!&ndash;        location="component://mountaineering/service/serviceGroovy.groovy">&ndash;&gt;-->
-<!--        <in-parameters>-->
-<!--            <auto-parameters entity-name="MoquiTraining" include="all"/>-->
-<!--        </in-parameters>-->
-<!--        <out-parameters>-->
-<!--            <auto-parameters entity-name="MoquiTraining" include="pk" required="true"/>-->
-<!--        </out-parameters>-->
-<!--    </service>-->
+    <service verb="create" noun="MoquiTraining" type="script"
+             location="component://moqui-training/service/moquitraining/createmoquitraining.groovy">
+        <in-parameters>
+            <auto-parameters entity-name="MoquiTraining" include="all"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters entity-name="MoquiTraining" include="pk"/>
+        </out-parameters>
+    </service>
+
 </services>
