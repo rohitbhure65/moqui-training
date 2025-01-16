@@ -20,8 +20,8 @@
         <actions>
             <entity-find entity-name="MoquiTraining" list="trainingList">
                 <econditions combine="or">
-                    <econdition field-name="trainingId" value="trainingId" ignore-if-empty="true"/>
-                    <econdition field-name="trainingName" operator="like" value="%${trainingName}%" ignore-case="true"/>
+                    <econdition field-name="trainingId" ignore-if-empty="true"/>
+                    <econdition field-name="trainingName" ignore-case="true"/>
                 </econditions>
                 <select-field field-name="trainingId,trainingName,trainingDate"/>
             </entity-find>
