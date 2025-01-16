@@ -21,7 +21,7 @@
             <entity-find entity-name="MoquiTraining" list="trainingList">
                 <econditions combine="or">
                     <econdition field-name="trainingId" ignore-if-empty="true"/>
-                    <econdition field-name="trainingName" ignore-case="true"/>
+                    <econdition field-name="trainingName" ignore-case="true" ignore-if-empty="true"/>
                 </econditions>
                 <select-field field-name="trainingId,trainingName,trainingDate"/>
             </entity-find>
