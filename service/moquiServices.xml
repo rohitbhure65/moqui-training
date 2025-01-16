@@ -13,7 +13,7 @@
         </in-parameters>
         <!-- is use for define what value will be return through in parameter -->
         <out-parameters>
-            <parameter name="trainingId" type="id""/>
+            <parameter name="trainingId" type="id"/>
         </out-parameters>
     </service>
 
