@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+<!--    Generate records in the MoquiTraining entity automatically. -->
+
+<!--    <service verb="create" noun="MoquiTraining" type="entity-auto"> &lt;!&ndash; verb is use for define what action we want to perform but noun is optional &ndash;&gt;-->
+<!--        &lt;!&ndash;Input parameters are specified with the in-parameters element&ndash;&gt;-->
+<!--        <in-parameters>-->
+<!--            <parameter name="trainingName" required="true"/>-->
+<!--            <parameter name="trainingDate" required="true" format="MM/dd/yyyy"/>-->
+<!--            <parameter name="trainingPrice"/>-->
+<!--            <parameter name="trainingDuration"/>-->
+<!--        </in-parameters>-->
+<!--        &lt;!&ndash; is use for define what value will be return through in parameter &ndash;&gt;-->
+<!--        <out-parameters>-->
+<!--            <parameter name="trainingId" type="id" required="true"/>-->
+<!--        </out-parameters>-->
+<!--    </service>-->
+
+        <!-- inline service -->
+
+    <service verb="create" noun="MoquiTraining" type="inline">
+        <in-parameters>
+            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
+            <parameter name="trainingName" required="true"/>
+            <parameter name="trainingDate" required="true" format="MM/dd/yyyy"/>
+            <parameter name="trainingPrice"/>
+            <parameter name="trainingDuration"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingId" type="id"/>
+        </out-parameters>
+        <actions>
+<!--            <entity-make-value entity-name="org.moqui.training.MoquiTraining" value-field="training"/>-->
+<!--            <entity-set value-field="MoquiTraining" include="all"/>-->
+<!--            <if condition="!training.trainingId">-->
+<!--                <entity-sequenced-id-primary value-field="tutorial"/>-->
+<!--            </if>-->
+<!--            <entity-create value-field="MoquiTraining"/>-->
+            <service-call name="create#MoquiTraining" in-map="context" out-map="context"/>
+        </actions>
+    </service>
+
+    <!--  Scripting Service-->
+
+<!--    <service verb="create" noun="MoquiGroovy" type="script">-->
+<!--&lt;!&ndash;        location="component://mountaineering/service/serviceGroovy.groovy">&ndash;&gt;-->
+<!--        <in-parameters>-->
+<!--            <auto-parameters entity-name="MoquiTraining" include="all"/>-->
+<!--        </in-parameters>-->
+<!--        <out-parameters>-->
+<!--            <auto-parameters entity-name="MoquiTraining" include="pk" required="true"/>-->
+<!--        </out-parameters>-->
+<!--    </service>-->
+</services>
