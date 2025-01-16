@@ -19,10 +19,10 @@
         </out-parameters>
         <actions>
             <entity-find entity-name="MoquiTraining" list="trainingList">
-                <condition combine="or">
-                    <condition field-name="trainingId" ignore-if-empty="true"/>
-                    <condition field-name="trainingName"  value="%${trainingName}%" ignore-case="true"/>
-                </condition>
+                <econditions combine="or">
+                    <econdition field-name="trainingId" from="trainingId" ignore-if-empty="true"/>
+                    <econdition field-name="trainingName" from="trainingName" ignore-case="true"/>
+                </econditions>
                 <select-field field-name="trainingId,trainingName,trainingDate"/>
             </entity-find>
         </actions>
