@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
 
-<!--    Generate records in the MoquiTraining entity automatically. -->
-
+        <!--  1. entity-auto service -->
     <service verb="create" noun="MoquiTraining" type="entity-auto"> <!-- verb is use for define what action we want to perform but noun is optional -->
-<!--        Input parameters are specified with the in-parameters element-->
+        <!--  Input parameters are specified with the in-parameters element-->
         <in-parameters>
             <parameter name="trainingName" required="true"/>
             <parameter name="trainingDate" required="true" format="MM/dd/yyyy"/>
@@ -17,8 +16,7 @@
         </out-parameters>
     </service>
 
-        <!-- inline service -->
-
+        <!-- 2. inline service -->
 <!--    <service verb="create" noun="MoquiTraining" type="inline">-->
 <!--        <in-parameters>-->
 <!--            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>-->
@@ -35,8 +33,7 @@
 <!--        </actions>-->
 <!--    </service>-->
 
-    <!--  Scripting Service-->
-
+    <!--  3. Script Service-->
 <!--    <service verb="create" noun="MoquiTraining" type="script"-->
 <!--             location="component://moqui-training/service/moquitraining/createmoquitraining.groovy">-->
 <!--        <in-parameters>-->

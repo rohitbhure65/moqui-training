@@ -27,49 +27,4 @@
             </entity-find>
         </actions>
     </service>
-
-    <!-- CREATE A SERVICE-->
-
-    <service verb="create" noun="MoquiTraining" type="entity-auto">
-        <in-parameters>
-            <parameter name="trainingId"/>
-            <parameter name="trainingName" required="true"/>
-            <parameter name="trainingDate" format="MM/dd" required="true"/>
-            <parameter name="trainingPrice"/>
-            <parameter name="trainingDuration"/>
-        </in-parameters>
-        <out-parameters>
-            <parameter name="trainingId" type="id"/>
-        </out-parameters>
-    </service>
-
-    <!-- UPDATE A SERVICE-->
-
-    <service verb="store" noun="MoquiTraining" type="inline">
-        <in-parameters>
-            <auto-parameter entity-name="MoquiTraining" include="nonpk"/>
-            <parameter name="trainingName" required="true"/>
-            <parameter name="trainingDate" format="MM/dd"/>
-        </in-parameters>
-        <out-parameters>
-            <parameter name="trainingId"/>
-        </out-parameters>
-        <actions>
-            <entity-find entity-name="MoquiTraining" list="trainingList">
-                <condition field-name="trainingId" value="${trainingId}" optional="true"/>
-                <condition field-name="trainingName" ignore-case="true"/>
-            </entity-find>
-            <if condition="trainingList">
-                <then>
-                    <set field="training" from ="trainingList.first"/>
-                    <entity-set value-field="training" map="context"/>
-                    <entity-update value-field="training"/>
-                    <set field="trainingId" from="training.trainingId"/>
-                </then>
-            </if>
-            <else>
-                <service-call name="create#MoquiTraining.MoquiTraining"/>
-            </else>
-        </actions>
-    </service>
 </services>
