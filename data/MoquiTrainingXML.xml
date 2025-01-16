@@ -1,0 +1,4 @@
+<entity-facade-xml type="seed-initial">
+    <MoquiTraining trainingId="1" trainingName="APP DEVELOPMENT" trainingDate="2025-02-10T09:00:00" trainingPrice="5000.99" trainingDuration="25"/>
+    <MoquiTraining trainingId="2" trainingName="SEO" trainingDate="025-03-15T10:00:00" trainingPrice="1500.99" trainingDuration="17"/>
+</entity-facade-xml>

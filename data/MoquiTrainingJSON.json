@@ -1,0 +1,19 @@
+[
+  { "_dataType": "seed-initial" },
+  {
+    "_entity": "MoquiTraining",
+    "trainingId": "5",
+    "trainingName": "UI/UX",
+    "trainingDate": "2025-03-15T10:00:00",
+    "trainingPrice": 400.99,
+    "trainingDuration": 5
+  },
+  {
+    "_entity": "MoquiTraining",
+    "trainingId": "6",
+    "trainingName": "CONTENT WRITING",
+    "trainingDate": "2025-04-20T08:30:00",
+    "trainingPrice": 653.99,
+    "trainingDuration": 20
+  }
+]
