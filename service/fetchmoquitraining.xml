@@ -8,29 +8,24 @@
             <parameter name="trainingId"/>
         </in-parameters>
         <out-parameters>
-            <parameter name="trainingList" type="List">
-                <parameter name="trainingMap" type="Map">
-                    <parameter name="trainingId"/>
-                    <parameter name="trainingName"/>
-                    <parameter name="trainingDate"/>
-                </parameter>
-            </parameter>
+            <parameter name="trainingList" type="List"/>
         </out-parameters>
         <actions>
             <entity-find entity-name="MoquiTraining" list="trainingList">
                 <econditions combine="or">
                     <econdition field-name="trainingId" ignore-if-empty="true"/>
-                    <econdition field-name="trainingName" ignore-case="true" ignore-if-empty="true"/>
+                    <econdition field-name="trainingName" operator="like" ignore-case="true" ignore-if-empty="true"/>
                 </econditions>
                 <select-field field-name="trainingId,trainingName,trainingDate"/>
             </entity-find>
+            <log message="fetched MoquiTraining Data ${trainingList}"/>
         </actions>
     </service>
 
     <!-- create & update using store verb MoquiTraining records -->
     <service verb="store" noun="MoquiTraining">
         <in-parameters>
-
+            <auto-parameters entity-name="MoquiTraining" include="nonpk"/>
             <parameter name="trainingName" required="true"/>
             <parameter name="trainingDate" format="MM/dd" required="true"/>
         </in-parameters>
@@ -38,7 +33,22 @@
             <parameter name="trainingId"/>
         </out-parameters>
         <actions>
-
+            <entity-find entity-name="MoquiTraining" list="MoquiTrainingList">
+                <econdition field-name="trainingName" ignore-case="true" ignore-if-empty="false"/>
+            </entity-find>
+            <if condition="MoquiTrainingList">
+                <then>
+                    <set field="MoquiTraining" from="MoquiTrainingList.first"/>
+                    <entity-set value-field="MoquiTraining" map="context"/>
+                    <entity-update value-field="MoquiTraining"/>
+                    <set field="trainingID" from="trainingId"/>
+                    <log message="update existing moqui training record"/>
+                </then>
+                <else>
+                    <service-call name="create#MoquiTraining" in-map="context" out-map="context"/>
+                    <log message="create new moqui training reacord"/>
+                </else>
+            </if>
         </actions>
     </service>
 </services>
