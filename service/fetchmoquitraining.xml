@@ -28,8 +28,18 @@
         </actions>
     </service>
 
-    <!-- update moquitraining records -->
+    <!-- create & update using store verb MoquiTraining records -->
     <service verb="store" noun="MoquiTraining">
-    
+        <in-parameters>
+            <!-- <auto-parameters entity-name="MoquiTraining" include="nonpk"/> -->
+            <parameter name="trainingName" required="true"/>
+            <parameter name="trainingDate" format="MM/dd" required="true"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="trainingId"/>
+        </out-parameters>
+        <actions>
+
+        </actions>
     </service>
 </services>
