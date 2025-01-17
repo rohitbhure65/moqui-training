@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
 
-
     <!-- Fetch records by trainingId and trainingName -->
     <service verb="find" noun="MoquiTraining">
         <in-parameters>
@@ -31,7 +30,7 @@
     <!-- create & update using store verb MoquiTraining records -->
     <service verb="store" noun="MoquiTraining">
         <in-parameters>
-            <!-- <auto-parameters entity-name="MoquiTraining" include="nonpk"/> -->
+
             <parameter name="trainingName" required="true"/>
             <parameter name="trainingDate" format="MM/dd" required="true"/>
         </in-parameters>
