@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+
+    <entity entity-name="Party" package="moquitraining">
+        <field name="partyId" type="id-long" is-pk="true" />
+        <field name="partyType" type="text-short" not-null="true" />
+        <field name="firstName" type="text-short" required="true"/>
+        <field name="lastName" type="text-short" required="true"/>
+    </entity>
+
+    <entity entity-name="ContactMech" package="moquitraining">
+        <field name="contactMechId" type="id" is-pk="true" />
+        <field name="partyId" type="id-long" />
+        <field name="streetAddress" type="text-medium" not-null="true" />
+        <field name="city" type="text-short" />
+        <field name="state" type="text-short" />
+        <field name="postalCode" type="text-short" />
+        <relationship type="one" dependent="true" related="Party">
+            <key-map field-name="partyId" related-field-name="partyId" />
+        </relationship>
+    </entity>
+
+    <entity entity-name="OrderHeader" package="moquitraining">
+        <field name="orderId" type="id-long" is-pk="true" />
+        <field name="orderDate" type="date" not-null="true" />
+        <field name="partyId" type="id-long" />
+        <field name="shippingContactMechId" type="id-long" />
+        <field name="billingContactMechId" type="id-long" />
+        <relationship type="one" related-entity-name="Party">
+            <key-map field-name="partyId" related-field-name="partyId" />
+        </relationship>
+        <relationship type="one" related-entity-name="ContactMech" dependent="true">
+            <key-map field-name="shippingContactMechId" related-field-name="contactMechId" />
+        </relationship>
+        <relationship type="one" related-entity-name="ContactMech" dependent="true">
+            <key-map field-name="billingContactMechId" related-field-name="contactMechId" />
+        </relationship>
+    </entity>
+
+    <entity entity-name="OrderItem" package="moquitraining">
+        <field name="orderItemSeqId" type="id-long" is-pk="true" />
+        <field name="orderId" type="id-long" />
+        <field name="productId" type="id-long" />
+        <field name="quantity" type="number-integer" not-null="true" />
+        <field name="status" type="text-short" />
+        <relationship type="one" related-entity-name="OrderHeader">
+            <key-map field-name="orderId" related-field-name="orderId" />
+        </relationship>
+        <relationship type="one" related-entity-name="Product">
+            <key-map field-name="productId" related-field-name="productId" />
+        </relationship>
+    </entity>
+
+    <entity entity-name="Product" package="moquitraining">
+        <field name="productId" type="id-long" is-pk="true" />
+        <field name="productName" type="text-medium" not-null="true" />
+        <field name="color" type="text-short" />
+        <field name="size" type="text-short" />
+    </entity>
+</entities>

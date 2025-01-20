@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+
+<!-- General Guideline Verbs: GET=find, POST=create/do, PUT=store (create or update), PATCH=update, DELETE=delete  -->
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/rest-api-3.xsd"
+          name="moquitraining" displayName="MOQUI-TRAINING REST API" version="1.0.0">
+    <!--  PARTY -->
+    <resource name="parties" require-authentication="anonymous-all">
+        <method type="get"><entity name="Party" operation="list"/></method>
+        <method type="post"><entity name="Party" operation="create"/></method>
+        <id name="partyId">
+            <method type="get"><entity name="Party"  operation="one"/></method>
+            <method type="put"><entity name="Party" operation="update"/></method>
+            <method type="delete"><entity name="Party" operation="delete"/></method>
+            <resource name="contacts" require-authentication="anonymous-all">
+                <method type="get"><entity name="moquitraining.ContactMech" operation="list"/></method>
+                <method type="post"><entity name="ContactMech" operation="create"/></method>
+                <id name="contactMechId">
+                    <method type="get"><entity name="ContactMech" operation="one"/></method>
+                    <method type="put"><entity name="ContactMech" operation="update"/></method>
+                    <method type="delete"><entity name="ContactMech" operation="delete"/></method>
+                </id>
+            </resource>
+        </id>
+    </resource>
+
+    <!--PRODUCT -->
+    <resource name="product">
+        <method type="get"><entity name="Product" operation="list"/></method>
+        <method type="post"><entity name="Product"  operation="create"/></method>
+                <id name="productId">
+                    <method type="get"><entity name="Product" operation="one"/></method>
+                    <method type="put"><entity name="Product" operation="update"/></method>
+                    <method type="delete"><entity name="Product" operation="delete"/></method>
+                </id>
+    </resource>
+
+<!--            ORDER HEADER-->
+    <resource name="order">
+                <method type="get"><entity name="OrderHeader" operation="list"/></method>
+                <method type="post"><entity name="OrderHeader" operation="create"/></method>
+                <id name="orderId">
+                    <method type="get"><entity name="OrderHeader" operation="one"></entity></method>
+                    <method type="put"><entity name="OrderHeader" operation="update"/></method>
+                    <method type="delete"><entity name="OrderHeader" operation="delete"/></method>
+                    <resource name ="items">
+                    <method type="post"><entity name="OrderItem" operation="create"></entity></method>
+                    </resource>
+                </id>
+    </resource>
+</resource>
