@@ -15,7 +15,7 @@
         <field name="city" type="text-short" />
         <field name="state" type="text-short" />
         <field name="postalCode" type="text-short" />
-        <relationship type="one" dependent="true" related="Party">
+        <relationship type="one" related-entity-name="Party" dependent="true">
             <key-map field-name="partyId" related-field-name="partyId" />
         </relationship>
     </entity>
