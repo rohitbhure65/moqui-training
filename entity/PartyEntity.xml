@@ -4,8 +4,8 @@
     <entity entity-name="Party" package="moquitraining">
         <field name="partyId" type="id-long" is-pk="true" />
         <field name="partyType" type="text-short" not-null="true" />
-        <field name="firstName" type="text-short" required="true"/>
-        <field name="lastName" type="text-short" required="true"/>
+        <field name="firstName" type="text-short"/>
+        <field name="lastName" type="text-short"/>
     </entity>
 
     <entity entity-name="ContactMech" package="moquitraining">
@@ -15,8 +15,8 @@
         <field name="city" type="text-short" />
         <field name="state" type="text-short" />
         <field name="postalCode" type="text-short" />
-        <relationship type="one" related-entity-name="Party" dependent="true">
-            <key-map field-name="partyId" related-field-name="partyId" />
+        <relationship type="one" related="Party" >
+            <key-map field-name="partyId" related="partyId" />
         </relationship>
     </entity>
 
@@ -26,14 +26,14 @@
         <field name="partyId" type="id-long" />
         <field name="shippingContactMechId" type="id-long" />
         <field name="billingContactMechId" type="id-long" />
-        <relationship type="one" related-entity-name="Party">
-            <key-map field-name="partyId" related-field-name="partyId" />
+        <relationship type="one" related="Party">
+            <key-map field-name="partyId" related="partyId" />
         </relationship>
-        <relationship type="one" related-entity-name="ContactMech" dependent="true">
-            <key-map field-name="shippingContactMechId" related-field-name="contactMechId" />
+        <relationship type="one" related="ContactMech">
+            <key-map field-name="shippingContactMechId" related="contactMechId" />
         </relationship>
-        <relationship type="one" related-entity-name="ContactMech" dependent="true">
-            <key-map field-name="billingContactMechId" related-field-name="contactMechId" />
+        <relationship type="one" related="ContactMech">
+            <key-map field-name="billingContactMechId" related="contactMechId" />
         </relationship>
     </entity>
 
@@ -43,11 +43,11 @@
         <field name="productId" type="id-long" />
         <field name="quantity" type="number-integer" not-null="true" />
         <field name="status" type="text-short" />
-        <relationship type="one" related-entity-name="OrderHeader">
-            <key-map field-name="orderId" related-field-name="orderId" />
+        <relationship type="one" related="OrderHeader">
+            <key-map field-name="orderId" related="orderId" />
         </relationship>
-        <relationship type="one" related-entity-name="Product">
-            <key-map field-name="productId" related-field-name="productId" />
+        <relationship type="one" related="Product">
+            <key-map field-name="productId" related="productId" />
         </relationship>
     </entity>
 
