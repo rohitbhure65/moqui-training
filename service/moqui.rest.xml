@@ -53,11 +53,11 @@ along with this software (see the LICENSE.md file). If not, see
                 <method type="get"><entity name="OrderHeader" operation="list"/></method>
                 <method type="post"><entity name="OrderHeader" operation="create"/></method>
                 <id name="orderId">
-                    <method type="get"><entity name="OrderHeader" operation="one"></entity></method>
+                    <method type="get"><entity name="OrderHeader" operation="one"></method>
                     <method type="put"><entity name="OrderHeader" operation="update"/></method>
                     <method type="delete"><entity name="OrderHeader" operation="delete"/></method>
                     <resource name ="items">
-                    <method type="post"><entity name="OrderItem" operation="create"></entity></method>
+                    <method type="post"><entity name="OrderItem" operation="create"/></method>
                     </resource>
                 </id>
     </resource>
