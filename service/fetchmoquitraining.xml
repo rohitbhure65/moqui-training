@@ -18,7 +18,7 @@
                 </econditions>
                 <select-field field-name="trainingId,trainingName,trainingDate"/>
             </entity-find>
-            <log message="fetched MoquiTraining Data ${trainingList}"/>
+            <log level="info" message="fetched MoquiTraining Data ${trainingList}"/>
         </actions>
     </service>
 
@@ -42,11 +42,11 @@
                     <entity-set value-field="MoquiTraining" map="context"/>
                     <entity-update value-field="MoquiTraining"/>
                     <set field="trainingID" from="trainingId"/>
-                    <log message="update existing moqui training record"/>
+                    <log level="info" message="update existing moqui training record"/>
                 </then>
                 <else>
                     <service-call name="create#MoquiTraining" in-map="context" out-map="context"/>
-                    <log message="create new moqui training reacord"/>
+                    <log level="info" message="create new moqui training record"/>
                 </else>
             </if>
         </actions>

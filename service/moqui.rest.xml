@@ -38,7 +38,7 @@ along with this software (see the LICENSE.md file). If not, see
     </resource>
 
     <!--PRODUCT -->
-    <resource name="product">
+    <resource name="product" require-authentication="anonymous-all">
         <method type="get"><entity name="Product" operation="list"/></method>
         <method type="post"><entity name="Product"  operation="create"/></method>
         <id name="productId">
@@ -49,7 +49,7 @@ along with this software (see the LICENSE.md file). If not, see
     </resource>
 
     <!--            ORDER HEADER-->
-    <resource name="order">
+    <resource name="order" require-authentication="anonymous-all">
         <method type="get"><entity name="OrderHeader" operation="list"/></method>
         <method type="post"><entity name="OrderHeader" operation="create"/></method>
         <id name="orderId">

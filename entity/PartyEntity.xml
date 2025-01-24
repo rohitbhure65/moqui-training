@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
 
-    <entity entity-name="Party" package="moquitraining">
+    <entity entity-name="Party" package="mountaineering" cache="true" short-alias="party">
         <field name="partyId" type="id-long" is-pk="true" />
         <field name="partyType" type="text-short" not-null="true" />
         <field name="firstName" type="text-short"/>
         <field name="lastName" type="text-short"/>
+        <!-- Relationships -->
+        <relationship type="many" related="ContactMech">
+            <key-map field-name="partyId" related="partyId" />
+        </relationship>
+        <relationship type="many" related="OrderHeader">
+            <key-map field-name="partyId" related="partyId" />
+        </relationship>
     </entity>
 
-    <entity entity-name="ContactMech" package="moquitraining">
+    <entity entity-name="ContactMech" package="mountaineering" cache="true" short-alias="contactMech">
         <field name="contactMechId" type="id" is-pk="true" />
         <field name="partyId" type="id-long" />
         <field name="streetAddress" type="text-medium" not-null="true" />
         <field name="city" type="text-short" />
         <field name="state" type="text-short" />
         <field name="postalCode" type="text-short" />
-        <relationship type="one" related="Party" >
+        <!-- Relationships -->
+        <relationship type="one" related="Party">
             <key-map field-name="partyId" related="partyId" />
+        </relationship>
+        <relationship type="many" related="OrderHeader">
+            <key-map field-name="contactMechId" related="shippingContactMechId" />
+            <key-map field-name="contactMechId" related="billingContactMechId" />
         </relationship>
     </entity>
 
-    <entity entity-name="OrderHeader" package="moquitraining">
+    <entity entity-name="OrderHeader" package="mountaineering" short-alias="orderheader" cache="true">
         <field name="orderId" type="id-long" is-pk="true" />
         <field name="orderDate" type="date" not-null="true" />
         <field name="partyId" type="id-long" />
         <field name="shippingContactMechId" type="id-long" />
         <field name="billingContactMechId" type="id-long" />
+        <!-- Relationships -->
         <relationship type="one" related="Party">
             <key-map field-name="partyId" related="partyId" />
         </relationship>
@@ -35,14 +48,18 @@
         <relationship type="one" related="ContactMech">
             <key-map field-name="billingContactMechId" related="contactMechId" />
         </relationship>
+        <relationship type="many" related="OrderItem">
+            <key-map field-name="orderId" related="orderId" />
+        </relationship>
     </entity>
 
-    <entity entity-name="OrderItem" package="moquitraining">
+    <entity entity-name="OrderItem" package="mountaineering" short-alias="orderitem" cache="true">
         <field name="orderItemSeqId" type="id-long" is-pk="true" />
         <field name="orderId" type="id-long" />
         <field name="productId" type="id-long" />
         <field name="quantity" type="number-integer" not-null="true" />
         <field name="status" type="text-short" />
+        <!-- Relationships -->
         <relationship type="one" related="OrderHeader">
             <key-map field-name="orderId" related="orderId" />
         </relationship>
@@ -51,10 +68,14 @@
         </relationship>
     </entity>
 
-    <entity entity-name="Product" package="moquitraining">
+    <entity entity-name="Product" package="mountaineering" short-alias="product" cache="true">
         <field name="productId" type="id-long" is-pk="true" />
         <field name="productName" type="text-medium" not-null="true" />
         <field name="color" type="text-short" />
         <field name="size" type="text-short" />
+        <!-- Relationships -->
+        <relationship type="many" related="OrderItem">
+            <key-map field-name="productId" related="productId" />
+        </relationship>
     </entity>
 </entities>
